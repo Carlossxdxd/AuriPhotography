@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuriPhotography - Capturando Tus Momentos</title>
+    <link rel="icon" href="img/AuriLogo (2).png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos base para la consistencia */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F9FAFB;
+            color: #111827;
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        /* Animaciones del carrusel */
+        .animate-fade-in-down {
+            animation: fadeInDown 1s ease-out;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <!-- Configuración de Tailwind para usar la fuente Poppins y colores personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4338CA', // indigo-700
+                        secondary: '#F9FAFB', // gray-50
+                        darktext: '#111827', // gray-900
+                        accent: '#EC4899', // rose-500, para detalles o resaltar
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="antialiased">
+
+    <a href="https://wa.me/18294775749?text=Hola!%20Me%20interesa%20reservar%20una%20sesi%C3%B3n%20de%20fotos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contactar a AuriPhotography por WhatsApp">
+        <svg class="w-8 h-8" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+        </svg>
+        <span class="sr-only">Contactar por WhatsApp</span>
+    </a>
+
+    <header class="bg-white shadow-sm py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="img/AuriLogo (2).png" alt="Logo de AuriPhotography" class="h-16 mr-3">
+                <span class="text-2xl font-bold text-gray-900 tracking-tight">AuriPhotography</span>
+            </a>
+
+            <nav class="hidden md:flex space-x-6">
+                <a href="portafolio.html" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Portafolio</a>
+                <a href="#servicios" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Servicios</a>
+                <a href="auri-art.html" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Auri Art</a>
+                <a href="reserva.html" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Reserva</a>
+                <a href="#tienda" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Tienda</a>
+                <a href="#sobre-mi" class="text-gray-700 hover:text-indigo-700 font-medium transition duration-300">Sobre Mí</a>
+            </nav>
+
+            <div class="hidden md:flex space-x-4">
+                <!-- Instagram Icono Monocromático (de la app) -->
+                <a href="https://www.instagram.com/auriiphotography?igsh=YnNmZ3YyNHZzdmtt" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent transition duration-300" aria-label="Instagram de AuriPhotography">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A4.3 4.3 0 003.3 7.6v8.4c0 2.4 1.9 4.3 4.3 4.3h8.4c2.4 0 4.3-1.9 4.3-4.3V7.6A4.3 4.3 0 0016.4 4H7.6z"/>
+                        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z"/>
+                        <circle cx="17.6" cy="6.4" r="1.2"/>
+                    </svg>
+                </a>
+                <!-- TikTok Icono Monocromático (clásico y compatible con hover) -->
+                <a href="https://www.tiktok.com/@auriiphotography?_t=ZM-8xXIdkSg3Qz&_r=1" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-black transition duration-300" aria-label="TikTok de AuriPhotography">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm-1.875 16.033c.125.133.313.133.438 0l1.75-1.75c.125-.125.125-.313 0-.438-.125-.125-.313-.125-.438 0l-1.75 1.75c-.125.125-.125.313 0 .438zm.75-5.316V13.5c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125.063-.25.188-.313.125-.063.25-.063.375 0l2.5 1.75c.125.063.188.188.188.313v2.125c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125-.063-.25-.188-.313-.125-.125-.313-.125-.438 0zM17.125 7.125a.875.875 0 11-1.75 0 .875.875 0 011.75 0z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <button id="mobileMenuButton" class="md:hidden text-gray-600 hover:text-indigo-700" aria-label="Abrir menú de navegación">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <nav id="mobileMenu" class="mobile-menu md:hidden bg-white shadow-md py-2 mt-2">
+            <a href="portafolio.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Portafolio</a>
+            <a href="#servicios" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Servicios</a>
+            <a href="auri-art.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Auri Art</a>
+            <a href="reserva.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Reserva</a>
+            <a href="#tienda" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Tienda</a>
+            <a href="#sobre-mi" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-700 font-medium transition duration-300">Sobre Mí</a>
+            <div class="px-4 py-2 flex justify-center space-x-4 border-t border-gray-200 mt-2">
+                <!-- Instagram Icono Monocromático (de la app) -->
+                <a href="https://www.instagram.com/auriiphotography?igsh=YnNmZ3YyNHZzdmtt" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-accent transition duration-300" aria-label="Instagram de AuriPhotography">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A4.3 4.3 0 003.3 7.6v8.4c0 2.4 1.9 4.3 4.3 4.3h8.4c2.4 0 4.3-1.9 4.3-4.3V7.6A4.3 4.3 0 0016.4 4H7.6z"/>
+                        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z"/>
+                        <circle cx="17.6" cy="6.4" r="1.2"/>
+                    </svg>
+                </a>
+                <!-- TikTok Icono Monocromático (clásico y compatible con hover) -->
+                <a href="https://www.tiktok.com/@auriiphotography?_t=ZM-8xXIdkSg3Qz&_r=1" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-black transition duration-300" aria-label="TikTok de AuriPhotography">
+                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm-1.875 16.033c.125.133.313.133.438 0l1.75-1.75c.125-.125.125-.313 0-.438-.125-.125-.313-.125-.438 0l-1.75 1.75c-.125.125-.125.313 0 .438zm.75-5.316V13.5c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125.063-.25.188-.313.125-.063.25-.063.375 0l2.5 1.75c.125.063.188.188.188.313v2.125c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125-.063-.25-.188-.313-.125-.125-.313-.125-.438 0zM17.125 7.125a.875.875 0 11-1.75 0 .875.875 0 011.75 0z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div id="carousel-container" class="absolute inset-0 w-full h-full">
+            <img src="img/9MESES.jpg" alt="Fotografía familiar en el parque" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out" data-carousel-item="active">
+            <img src="img/DSC04478.jpg" alt="Retrato de bebé sonriendo" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out" data-carousel-item>
+            <img src="img/5 MESES.jpg" alt="Sesión de fotos de 5 meses" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out" data-carousel-item>
+            <img src="img/3 MESES.jpg" alt="Boda en atardecer" class="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out" data-carousel-item>
+            </div>
+
+        <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
+
+        <div class="relative z-10 text-center text-white p-8 rounded-lg">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">AuriPhotography</h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 animate-fade-in-up font-light">Los momentos especiales, merecen un lindo recuerdo.. Gracias por déjame ser parte de tu historia.</p>
+            <a href="reserva.html" class="inline-block bg-indigo-700 text-white hover:bg-indigo-800 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">Reserva Tu Sesión</a>
+        </div>
+
+        <button type="button" class="absolute top-1/2 left-4 z-20 flex items-center justify-center h-10 w-10 rounded-full bg-white/30 hover:bg-white/50 focus:outline-none focus:ring-4 focus:ring-white dark:bg-gray-800/30 dark:hover:bg-gray-800/60 dark:focus:ring-gray-800/70 cursor-pointer" data-carousel-prev aria-label="Imagen anterior">
+            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-500 dark:text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                <span class="sr-only">Anterior</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-1/2 right-4 z-20 flex items-center justify-center h-10 w-10 rounded-full bg-white/30 hover:bg-white/50 focus:outline-none focus:ring-4 focus:ring-white dark:bg-gray-800/30 dark:hover:bg-gray-800/60 dark:focus:ring-gray-800/70 cursor-pointer" data-carousel-next aria-label="Imagen siguiente">
+            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-500 dark:text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="sr-only">Siguiente</span>
+            </span>
+        </button>
+    </section>
+
+      <section id="sobre-mi" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+            <div class="w-full md:w-1/3 flex justify-center mb-8 md:mb-0">
+                <img src="img/marimar.jpg" alt="Retrato de Auri" class="rounded-full w-70 h-70 object-cover shadow-lg border-4 border-indigo-200">
+            </div>
+            <div class="w-full md:w-2/3 text-center md:text-left">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Hola, soy Auri.</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                    Desde pequeña, supe que mi pasión era capturar la belleza del mundo y las emociones genuinas. Lo que comenzó como un pasatiempo, se convirtió en AuriPhotography: mi sueño de congelar esos momentos irrepetibles que forman tu historia.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Cada sesión es una oportunidad para crear arte, para contar una narrativa única, ya sea la magia de una familia que crece, la inocencia de un bebé o la esencia de una persona en su máxima expresión. Me encanta trabajar de cerca con cada cliente para asegurar que el resultado final no solo sea una fotografía, sino un recuerdo precioso que atesorarán por siempre.
+                </p>
+                <a href="reserva.html" class="inline-block bg-indigo-700 text-white hover:bg-indigo-800 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">Conversemos sobre tu sesión</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portafolio" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Mi Portafolio</h2>
+
+            <div class="flex justify-center space-x-4 mb-8 flex-wrap gap-2">
+                <button class="px-6 py-2 rounded-full bg-indigo-700 text-white shadow-md hover:bg-indigo-800 transition duration-300 text-sm">Todo</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 border border-gray-200 shadow-sm hover:bg-gray-200 transition duration-300 text-sm">Familiares</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 border border-gray-200 shadow-sm hover:bg-gray-200 transition duration-300 text-sm">Bebés</button>
+                <button class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 border border-gray-200 shadow-sm hover:bg-gray-200 transition duration-300 text-sm">Personales</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="relative overflow-hidden rounded-lg shadow-md group">
+                    <img src="img/9MESES.jpg" alt="Fotografía Familiar" class="w-full h-64 object-cover transition duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white text-lg font-semibold">Momentos en Familia</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-md group">
+                    <img src="img/3 MESES.jpg" alt="Fotografía de Bebé" class="w-full h-64 object-cover transition duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white text-lg font-semibold">Dulces Sueños</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-md group">
+                    <img src="img/DSC01480.jpg" alt="Fotografía Personal" class="w-full h-64 object-cover transition duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white text-lg font-semibold">Retrato Único</p>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden rounded-lg shadow-md group">
+                    <img src="img/DSC01375.jpg" alt="Fotografía Familiar" class="w-full h-64 object-cover transition duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <p class="text-white text-lg font-semibold">Conexión Familiar</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="portafolio.html" class="inline-block bg-indigo-700 text-white hover:bg-indigo-800 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">Ver Portafolio Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Nuestras Sesiones Fotográficas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center border-t-4 border-indigo-700">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sesiones Familiares</h3>
+                    <p class="text-gray-600 mb-4">Capturamos la esencia y la alegría de tu familia en momentos inolvidables.</p>
+                    <ul class="text-gray-700 text-left mx-auto max-w-xs mb-4 space-y-2">
+                        <li>&#10003; 1-2 horas de sesión</li>
+                        <li>&#10003; 30 fotos editadas en alta resolución</li>
+                        <li>&#10003; Galería online privada</li>
+                    </ul>
+                    <span class="text-3xl font-bold text-indigo-700">$350+</span>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center border-t-4 border-rose-500">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sesiones para Bebés</h3>
+                    <p class="text-gray-600 mb-4">Retratamos los primeros días y meses de tu bebé con ternura y creatividad.</p>
+                    <ul class="text-gray-700 text-left mx-auto max-w-xs mb-4 space-y-2">
+                        <li>&#10003; Sesión de 1 hora</li>
+                        <li>&#10003; 15 fotos editadas profesionalmente</li>
+                        <li>&#10003; Accesorios temáticos incluidos</li>
+                    </ul>
+                    <span class="text-3xl font-bold text-rose-500">$200+</span>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center border-t-4 border-emerald-600">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Sesiones Personales</h3>
+                    <p class="text-gray-600 mb-4">Retratos individuales para realzar tu personalidad, en estudio o exterior.</p>
+                    <ul class="text-gray-700 text-left mx-auto max-w-xs mb-4 space-y-2">
+                        <li>&#10003; 45 minutos de sesión</li>
+                        <li>&#10003; 10 fotos de alta calidad</li>
+                        <li>&#10003; Opciones de ubicación</li>
+                    </ul>
+                    <span class="text-3xl font-bold text-emerald-600">$150+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+<section id="indicaciones-importantes" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Indicaciones Importantes</h2>
+        <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6">
+            <p class="text-gray-700 mb-4">Si te gustaría pautar una sesión conmigo debes tomar en cuenta las siguientes indicaciones:</p>
+            <ul class="list-none space-y-3">
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Consultar disponibilidad de las fechas.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>El estudio cuenta con café, agua, ambiente cómodo, aire acondicionado.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Pago 50% por adelantado de la sesión.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Confirmar cita un día antes del día pautado.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Solo fotos digitales (no impreso).</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Puntualidad para su sesión.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>No se entregan fotos sin edición.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Precios no válidos para eventos sociales.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Se permiten dos (02) cambios de vestuarios.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Por sesión máximo 04 personas.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>El cliente puede traer elementos que agreguen valor a las fotos: globos, confeti, elementos decorativos, bizcocho, copas, vino, flores, etc.</span>
+                </li>
+                <li class="flex items-start text-gray-700">
+                    <svg class="w-5 h-5 mt-1 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Los traslados fuera de punta cana deberá costearlo el cliente (en caso de sesiones de fotos en el exterior).</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+    <section id="tienda" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Mi Tienda</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Aquí podrás encontrar impresiones de alta calidad, obras de arte exclusivas y productos relacionados con la fotografía.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/400x300/E0E7FF/000000?text=Obra+Arte" alt="Obra de Arte" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-900 mb-2">Impresión Artística "Amanecer"</h3>
+                            <p class="text-gray-600 text-sm mb-4">Impresión de alta calidad en papel Hahnemühle, edición limitada.</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-indigo-700">$199.00</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition duration-300 text-sm add-to-cart" data-name="Impresión Artística 'Amanecer'" data-price="199.00">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/400x300/DBEAFE/000000?text=Album+Personalizado" alt="Álbum Personalizado" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-900 mb-2">Álbum de Fotos Personalizado</h3>
+                            <p class="text-gray-600 text-sm mb-4">Diseño exclusivo con tus fotos favoritas. Tapa dura y papel premium.</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-indigo-700">$120.00</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition duration-300 text-sm add-to-cart" data-name="Álbum de Fotos Personalizado" data-price="120.00">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/400x300/FDBA74/000000?text=Gift+Card" alt="Tarjeta de Regalo" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-bold text-xl text-gray-900 mb-2">Tarjeta de Regalo (Valor a Elegir)</h3>
+                            <p class="text-gray-600 text-sm mb-4">Regala una sesión fotográfica o una obra de arte. Contacta para personalizar.</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-indigo-700">Desde $50.00</span>
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition duration-300 text-sm" onclick="location.href='reserva.html'">Contactar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Tu Carrito</h3>
+            <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl">
+                <div id="cart-items" class="space-y-4 mb-6">
+                    <p id="empty-cart-message" class="text-center text-gray-500 italic">Tu carrito está vacío.</p>
+                </div>
+                
+                <div class="flex justify-between items-center border-t border-gray-200 pt-4">
+                    <p class="text-xl font-bold text-gray-800">Total:</p>
+                    <p class="text-xl font-bold text-indigo-700" id="cart-total">$0.00</p>
+                </div>
+                <div class="mt-8 text-center">
+                    <button class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105" id="checkout-button" disabled>
+                        Proceder al Pago
+                    </button>
+                    <p class="text-sm text-gray-500 mt-2">Esta sección es una maqueta. La funcionalidad de pago y el carrito de compras requieren un backend para ser completamente funcionales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold mb-4">AuriPhotography</h3>
+            <p class="mb-4 text-gray-300">Capturando tus momentos más preciosos y creando arte con pasión.</p>
+            
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- Instagram Icono Monocromático (de la app) -->
+                <a href="https://www.instagram.com/auriiphotography?igsh=YnNmZ3YyNHZzdmtt" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-accent transition duration-300" aria-label="Instagram de AuriPhotography">
+                    <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm-.2 2A4.3 4.3 0 003.3 7.6v8.4c0 2.4 1.9 4.3 4.3 4.3h8.4c2.4 0 4.3-1.9 4.3-4.3V7.6A4.3 4.3 0 0016.4 4H7.6z"/>
+                        <path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6z"/>
+                        <circle cx="17.6" cy="6.4" r="1.2"/>
+                    </svg>
+                    <span class="sr-only">Instagram</span>
+                </a>
+                <!-- TikTok Icono Monocromático (clásico y compatible con hover) -->
+                <a href="https://www.tiktok.com/@auriiphotography?_t=ZM-8xXIdkSg3Qz&_r=1" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-300" aria-label="TikTok de AuriPhotography">
+                    <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm-1.875 16.033c.125.133.313.133.438 0l1.75-1.75c.125-.125.125-.313 0-.438-.125-.125-.313-.125-.438 0l-1.75 1.75c-.125.125-.125.313 0 .438zm.75-5.316V13.5c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125.063-.25.188-.313.125-.063.25-.063.375 0l2.5 1.75c.125.063.188.188.188.313v2.125c0 .275-.225.5-.5.5h-.5c-.275 0-.5-.225-.5-.5v-2.125c0-.125-.063-.25-.188-.313-.125-.125-.313-.125-.438 0zM17.125 7.125a.875.875 0 11-1.75 0 .875.875 0 011.75 0z"/>
+                    </svg>
+                    <span class="sr-only">TikTok</span>
+                </a>
+                <a href="https://wa.me/18294775749?text=Hola!%20Me%20interesa%20reservar%20una%20sesi%C3%B3n%20de%20fotos%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n." target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-green-500 transition duration-300" aria-label="WhatsApp de AuriPhotography">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+                    </svg>
+                    <span class="sr-only">WhatsApp</span>
+                </a>
+            </div>
+            
+            <p class="text-gray-400">&copy; 2024 AuriPhotography. Todos los derechos reservados.</p>
+            <p class="text-sm text-gray-500 mt-2">Desarrollado por: Robert Mercado </p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
